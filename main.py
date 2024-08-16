@@ -7,8 +7,28 @@ from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-# Directory to save audio files
-AUDIO_DIR = "https://github.com/Meet2147/MorseMania/tree/main/audio_files"
+dot_url = "https://raw.githubusercontent.com/Meet2147/MorseMania/main/data/dot.ogg"
+dash_url = "https://raw.githubusercontent.com/Meet2147/MorseMania/main/data/dash.ogg"
+
+# Directory to store the files
+data_dir = "data"
+os.makedirs(data_dir, exist_ok=True)
+
+# Download the dot.ogg file
+dot_response = requests.get(dot_url)
+if dot_response.status_code == 200:
+    with open(os.path.join(data_dir, "dot.ogg"), 'wb') as f:
+        f.write(dot_response.content)
+else:
+    print(f"Failed to download dot.ogg, status code: {dot_response.status_code}")
+
+# Download the dash.ogg file
+dash_response = requests.get(dash_url)
+if dash_response.status_code == 200:
+    with open(os.path.join(data_dir, "dash.ogg"), 'wb') as f:
+        f.write(dash_response.content)
+else:
+    print(f"Failed to download dash.ogg, status code: {dash_response.status_code}")
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
 # Morse code dictionary
@@ -36,9 +56,9 @@ async def to_morse(text: str):
         morse_audio = AudioSegment.silent(duration=0)
         for symbol in morse_code:
             if symbol == '.':
-                morse_audio += AudioSegment.from_file("https://github.com/Meet2147/MorseMania/tree/main/data/dot.ogg", format="ogg") + AudioSegment.silent(duration=200)
+                morse_audio += AudioSegment.from_file("data/dot.ogg", format="ogg") + AudioSegment.silent(duration=200)
             elif symbol == '-':
-                morse_audio += AudioSegment.from_file("https://github.com/Meet2147/MorseMania/tree/main/data//dash.ogg", format="ogg") + AudioSegment.silent(duration=200)
+                morse_audio += AudioSegment.from_file("data/dash.ogg", format="ogg") + AudioSegment.silent(duration=200)
             elif symbol == ' ':
                 morse_audio += AudioSegment.silent(duration=600)  # Space between words
 
