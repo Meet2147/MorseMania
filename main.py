@@ -8,7 +8,7 @@ from fastapi.responses import FileResponse
 app = FastAPI()
 
 # Directory to save audio files
-AUDIO_DIR = "audio_files"
+AUDIO_DIR = "https://github.com/Meet2147/MorseMania/tree/main/audio_files"
 os.makedirs(AUDIO_DIR, exist_ok=True)
 
 # Morse code dictionary
@@ -36,9 +36,9 @@ async def to_morse(text: str):
         morse_audio = AudioSegment.silent(duration=0)
         for symbol in morse_code:
             if symbol == '.':
-                morse_audio += AudioSegment.from_file("data/dot.ogg", format="ogg") + AudioSegment.silent(duration=200)
+                morse_audio += AudioSegment.from_file("https://github.com/Meet2147/MorseMania/tree/main/data/dot.ogg", format="ogg") + AudioSegment.silent(duration=200)
             elif symbol == '-':
-                morse_audio += AudioSegment.from_file("data/dash.ogg", format="ogg") + AudioSegment.silent(duration=200)
+                morse_audio += AudioSegment.from_file("https://github.com/Meet2147/MorseMania/tree/main/data//dash.ogg", format="ogg") + AudioSegment.silent(duration=200)
             elif symbol == ' ':
                 morse_audio += AudioSegment.silent(duration=600)  # Space between words
 
