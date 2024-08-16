@@ -12,6 +12,7 @@ dot_url = "https://raw.githubusercontent.com/Meet2147/MorseMania/main/data/dot.o
 dash_url = "https://raw.githubusercontent.com/Meet2147/MorseMania/main/data/dash.ogg"
 
 # Directory to store the files
+AUDIO_DIR = "audio_files"
 data_dir = "data"
 os.makedirs(data_dir, exist_ok=True)
 
