@@ -4,6 +4,7 @@ from gtts import gTTS
 import io
 import os
 from fastapi.responses import FileResponse
+import requests
 
 app = FastAPI()
 
